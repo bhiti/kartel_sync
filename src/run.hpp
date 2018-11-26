@@ -20,7 +20,6 @@ public:
   
   TH1I *hDeltaTimeStamp;
   TH2I *hDeltaVsInvalid;
-  TH1I *hRatio;
   
   IOHandler *IOHand;
   Histograms *histos;

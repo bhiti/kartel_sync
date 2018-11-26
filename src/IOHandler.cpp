@@ -63,7 +63,7 @@ void IOHandler::Init(event* Event, const char* fname_drs, const char* fname_tel,
   else cout << "No telescope file specified" << endl;
   
   if (strlen(fname_anchor) != 0){
-    cout << "Loading FEI4 file      " << fname_anchor << endl;
+    cout << "Loading FEI4 file " << fname_anchor << endl;
     f_anchor = new TFile(fname_anchor);	
     t_anchor_ts = (TTree*) f_anchor->Get("Event");
     t_anchor_ts->SetBranchStatus("TimeStamp",1);
@@ -133,10 +133,6 @@ int IOHandler::CreateSyncedFile()
   }
 
   TTree * inputEvents = t_tel_ts;
-//   if(inputEvents->SetBranchAddress("TimeStamp", &_event->tel_ts) != 0){
-//     std::cout << "Branch not found, stopping script..." << std::endl;
-//     return -1;
-//   }
   if(inputEvents->SetBranchAddress("FrameNumber", &_event->tel_frameNumber) != 0){
     std::cout << "Branch not found, stopping script..." << std::endl;
     return -1;
