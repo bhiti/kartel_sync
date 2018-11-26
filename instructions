@@ -1,5 +1,5 @@
 Ljubljana beam telescope data conversion and synchronization
-Based on aligning the time stamps in two files. Missing events in the telescope file are filled with dummy events (0 tracks).
+Based on aligning the time stamps in two files. Missing events in the telescope file are filled with dummy events (0 tracks). 
 
 ------------------------------------------------------------
 REQUIREMENTS:
