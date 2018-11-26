@@ -19,7 +19,7 @@
 #include "src/run.cpp"
 
 // void check_sync(const char* fname_tel="../../2018/oct2018/data/conv/anchor1154.root", const char* fname_anchor="../../2018/oct2018/data/conv/run1154.root", const char* fname_synced="", int Nevents = 123456789)
-void check_sync(const char* fname_tel="../../2018/oct2018/data/conv/tel_final1154.root", const char* fname_anchor="../../2018/oct2018/data/conv/ref1154.root", const char* fname_synced="", int Nevents = 123456789)
+void check_sync(const char* fname_tel="../../../2018/oct2018/data/conv/tel_final1154.root", const char* fname_anchor="../../../2018/oct2018/data/conv/ref1154.root", const char* fname_synced="", int Nevents = 123456789)
 {
   gErrorIgnoreLevel = kWarning;
   gStyle->SetPalette(55);
@@ -107,7 +107,7 @@ void check_sync(const char* fname_tel="../../2018/oct2018/data/conv/tel_final115
 // //   cout << "Events in synced file: " << r->IOHand->outputEvents->GetEntries() << endl;
 // //   r->WriteAll();
   
-  r->hRatio->Draw();
+//   r->hRatio->Draw();
 // //   cout << r->hRatio->Integral(6,20) << endl;
 //   
 // //   r->IOHand->t_anchor_ts->GetEntry(0);

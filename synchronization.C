@@ -54,7 +54,7 @@ void synchronization(const char* fname_tel="", const char* fname_anchor="", cons
   if (r->CreateSyncedFile() < 0) return;
   
   float mean_ratio = 0.5;
-  float tolerance_factor = 1.02;
+  float tolerance_factor = 1.05;
   r->SetRatio(mean_ratio, tolerance_factor);          // ratio of time stamp deltas for syncing (target_ratio, tolerance_factor)
   
   int istart = 0;
@@ -117,9 +117,7 @@ void synchronization(const char* fname_tel="", const char* fname_anchor="", cons
   cout << "Events in synced file: " << r->IOHand->outputEvents->GetEntries() << endl;
   r->WriteAll();
   
-  r->hRatio->Draw();
-//   cout << r->hRatio->Integral(6,20) << endl;
-  
+//   r->hRatio->Draw();  
 //   r->IOHand->t_anchor_ts->GetEntry(0);
 //   cout << r->Event->ts_anchor << endl;
 //   r->IOHand->t_anchor_ts->GetEntry(r->IOHand->t_anchor_ts->GetEntries()-2);

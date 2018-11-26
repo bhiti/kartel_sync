@@ -18,11 +18,9 @@ run::run(const char* fname_drs, const char* fname_tel, const char *fname_anchor,
   rel_offset = 0;
   abs_offset = 0;
   ratio_mean = 20;		// expected delta_drs / delta_tel
-  ratio_tolerance = 1.2;	// Bojan 1.2	// allowed deviation from expected ratio (factor)
+  ratio_tolerance = 1.3;	// Bojan 1.2	// allowed deviation from expected ratio (factor)
   ratio_low = ratio_mean / ratio_tolerance;
   ratio_high = ratio_mean*ratio_tolerance;
-  
-  hRatio = new TH1I("hRatio", "hRatio", 500, 0, 0.001);
   
 //   hDeltaTimeStamp = new TH1I("hDelta", "Delta Time Stamp Telescope", 100, 0, 10000);
 //   hDeltaVsInvalid = new TH2I("hDelta2D", "Delta Time Stamp Telescope", 1000, 0, 500000, 2, -0.5, 1.5);
@@ -279,14 +277,8 @@ void run::GetTimeStamp(int ie)
   
 int run::ProcessTimestamp(int ie, int mode, int verbose)
 {
-//   cout << "*********************" << endl;
-//   cout << ie << endl;
   float ratio = GetRatio(ie+rel_offset, ie, mode);			// Calculate ts ratio  
   hRatio->Fill(ratio);
-  
-//   cout << ratio << endl;
-//   char c;
-//   cin >> c;
   
 //   hDeltaTimeStamp->Fill(Event->delta_FEI4);
 //   hDeltaVsInvalid->Fill(Event->delta_FEI4, Event->tel_invalid ? 1 : 0);
@@ -309,7 +301,6 @@ int run::ProcessOffsets(int ie)
   int orel = offsets.first;
   int oabs = offsets.second;
     
-//   cout << orel << " " << oabs << endl;
   //modify global offsets
   rel_offset += orel;   
   abs_offset += oabs;
@@ -318,15 +309,17 @@ int run::ProcessOffsets(int ie)
   // first skip the number of events in both files
   //
   for (int i=0; i<oabs; i++){
-//     FillSyncedFileDummy(ie); //Bojan
+    FillSyncedFileDummy(ie); //Bojan
     iskipped++;   
   }
   
   //
   // then skip the number of events in a single file
   //
-  for (int i=0; i<orel; i++){
-//     FillSyncedFileDummy(ie); //Bojan
+  for (int i=0; i<-orel; i++){
+    // BOJAN 
+    // Check for which sign of orel the iteration is necessary !!
+    FillSyncedFileDummy(ie); //Bojan
     iskipped++;
   }
   // if orel<0 do nothing
@@ -407,7 +400,6 @@ float run::GetRatio(int i0, int i1, int mode)
       break;
   }
 
-//   cout << d1 << " " << d2 << " " << 1.0*d1/d2 << endl;
   if (d2 == 0) d2 = 1;
   
   float ratio = 1.0 * d1 / d2;	// 1e4 to get the ratio in the region of ~1
