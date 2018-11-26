@@ -1,0 +1,16 @@
+#!/bin/bash
+
+RUN=$1
+
+if [ "$#" -lt 1 ]; then
+    echo "Usage:"
+    echo "$ ./script_move_to_server <RUN>"
+    exit
+fi
+
+CMD_SCP="scp ../data/proteusFiles/synced$RUN.root bojan@lxplus.cern.ch:/afs/cern.ch/work/b/bojan/public"
+echo $CMD_SCP
+eval $CMD_SCP
+
+#scp ../data/proteusFiles/synced$1.root bojan@lxplus.cern.ch:/afs/cern.ch/work/b/bojan/public
+
